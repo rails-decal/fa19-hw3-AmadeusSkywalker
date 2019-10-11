@@ -1,0 +1,10 @@
+<h1> Update your cities! </h1>
+<%= form_with local:true, method:"post" do |f| %>
+   <%= f.label :name %>
+   <%= f.text_field :name %>
+   <%= f.label :population %>
+   <%= f.text_field :population %>
+   <%= f.label :landmark %>
+   <%= f.text_field :landmark %>
+   <%= f.submit  %>
+<% end %>

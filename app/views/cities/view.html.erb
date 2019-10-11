@@ -1,0 +1,35 @@
+<% if (not @c.nil?) %>
+    <% if City.all.key?(@c.to_sym) %>
+	    <h1> <%= @c %> </h1>
+		<h2>  Population: <%= City.all[@c.to_sym].population %> </h2>
+		<h2>  LandMark: <%= City.all[@c.to_sym].landmark %> </h2>
+		<% if not @w.nil? %>
+		<p>
+			It's <%= @temperature %>°F
+			and it looks like <%= @w[:description] %>
+		</p>
+		<% end %>
+	<% else %>
+	    <h2> City <%= @c %> doesn't exist! </h2>
+	<% end %>
+ <% else %>
+    <% if City.all.empty? %>
+		<h2> No cities exist now! </h2>
+    <% else %>
+        <% @cities = City.all.keys %>
+		<% @cities.each do |city| %>
+		<% @w = WeatherService.get(city.to_sym) %>
+		<% if not @w.nil? %>
+		   <h1> <%= city %> </h1>
+		   <h2>  Population: <%= City.all[city].population %> </h2>
+		   <h2>  LandMark: <%= City.all[city].landmark %> </h2>
+		   <% @temperature = (9/5) * (@w[:temperature] - 273) + 32 %>
+		   <p>
+		   	It's <%= @temperature %>°F
+		    and it looks like <%= @w[:description] %>
+		   </p>
+		<% end %>
+	<% end %>
+<% end %>
+<% end %>
+	
